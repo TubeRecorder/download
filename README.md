@@ -10,7 +10,7 @@ Provides all the necessary APIs to download different different resources from Y
 
 To clone this repository:
 
-    git clone --recurse-submodules -j8 ssh://git@gitea.girgis.me:32822/tube-recorder/download.git
+    git clone --recurse-submodules -j8 git@github.com:TubeRecorder/download.git
 
 To make sure `master` branch is checked out:
 
