@@ -26,3 +26,9 @@ pub struct Arguments {
     #[structopt(long, parse(from_os_str))]
     pub log_file: Option<PathBuf>,
 }
+
+impl Arguments {
+    pub fn get() -> Self {
+        Arguments::from_args()
+    }
+}
