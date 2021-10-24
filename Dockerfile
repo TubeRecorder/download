@@ -5,7 +5,7 @@ COPY . .
 RUN \
   cargo install --path .
 
-FROM tube-recorder/rust-release:latest
+FROM tube-recorder/rust-release-download:latest
 
 COPY \
   --from=builder \
