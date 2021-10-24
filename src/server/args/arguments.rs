@@ -16,7 +16,7 @@ pub struct Arguments {
 
     /// Service port number
     #[structopt(long, default_value = "50051")]
-    pub service_port: i32,
+    pub service_port: u16,
 
     /// Activate stdout logging
     #[structopt(long)]
