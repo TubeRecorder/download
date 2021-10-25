@@ -37,28 +37,28 @@ mod download_api;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args = Arguments::get();
+  let args = Arguments::get();
 
-    setup_logger(
-        args.debug,
-        args.stdout_log,
-        args.log_file.clone(),
-    )
+  setup_logger(
+    args.debug,
+    args.stdout_log,
+    args.log_file.clone(),
+  )
+  .unwrap();
+
+  info!("{:?}", &args);
+
+  let addr = format!("0.0.0.0:{}", args.service_port)
+    .parse()
     .unwrap();
 
-    info!("{:?}", &args);
+  let download_service = DownloadService::default();
+  info!("Server listening on {}", addr);
 
-    let addr = format!("0.0.0.0:{}", args.service_port)
-        .parse()
-        .unwrap();
+  Server::builder()
+    .add_service(DownloadServer::new(download_service))
+    .serve(addr)
+    .await?;
 
-    let download_service = DownloadService::default();
-    info!("Server listening on {}", addr);
-
-    Server::builder()
-        .add_service(DownloadServer::new(download_service))
-        .serve(addr)
-        .await?;
-
-    Ok(())
+  Ok(())
 }

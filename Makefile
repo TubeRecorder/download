@@ -20,3 +20,6 @@ client:
 run:
 	cargo run --bin server -- \
 	--stdout-log
+
+fmt:
+	/usr/bin/find ./ -type f -name "*.rs" -exec rustfmt {} \;
