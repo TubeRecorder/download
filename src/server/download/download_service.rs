@@ -1,5 +1,9 @@
 use log::info;
-use std::process::Command;
+use std::{
+  process::Command,
+  time::Instant,
+};
+
 use tonic::{
   Request,
   Response,
@@ -21,6 +25,8 @@ impl Download for DownloadService {
     &self,
     request: Request<DownloadRequest>,
   ) -> Result<Response<DownloadResponse>, Status> {
+    let start = Instant::now();
+
     info!("{:?}", request);
 
     let req = request.get_ref();
@@ -66,6 +72,8 @@ impl Download for DownloadService {
         )))
       },
     };
+
+    info!("duration {:?}", start.elapsed());
 
     Ok(Response::new(DownloadResponse {
       status: output.status.code().unwrap_or(1),
